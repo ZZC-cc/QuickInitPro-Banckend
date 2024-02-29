@@ -1,4 +1,4 @@
-# QuickerInit Pro 管理系统后端初始模板
+# QuickInit Pro 管理系统后端初始模板
 
 > 作者：[ZZC-cc](https://github.com/ZZC-cc/)
 
