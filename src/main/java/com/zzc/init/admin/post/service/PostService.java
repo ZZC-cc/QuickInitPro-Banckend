@@ -34,6 +34,8 @@ public interface PostService extends IService<Post> {
 
     List<PostVO> getMyPostsVO(HttpServletRequest request);
 
+    List<PostVO> getPostsVOByNumber(int number);
+
     boolean editPost(@RequestBody PostEditRequest postEditRequest, HttpServletRequest request);
 
     boolean updatePost(@RequestBody PostUpdateRequest postUpdateRequest);

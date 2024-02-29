@@ -83,6 +83,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     /**
+     * 根据数量订单VO列表
+     */
+    @Override
+    public List<OrderVO> getOrderVOByNumber(int number) {
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("createTime").last("limit " + number);
+        List<Order> orders = this.list(queryWrapper);
+        List<OrderVO> orderVOS = orders.stream().map(OrderVO::objToVo).collect(java.util.stream.Collectors.toList());
+        for (OrderVO orderVO : orderVOS) {
+            orderVO.setUser(userService.getUserByUserId(orderVO.getUserId()));
+            orderVO.setOrderDetails(orderDetailService.getOrderDetailByOrderId(orderVO.getId()));
+        }
+        return orderVOS;
+    }
+
+    /**
      * 多类型搜索
      */
     @Override

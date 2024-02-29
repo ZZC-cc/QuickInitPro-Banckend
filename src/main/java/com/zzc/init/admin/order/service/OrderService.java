@@ -20,6 +20,8 @@ public interface OrderService extends IService<Order> {
 
     List<OrderVO> getAllOrderVO();
 
+    List<OrderVO> getOrderVOByNumber(int number);
+
     List<OrderVO> searchOrderVO(String searchText);
 
     List<OrderVO> getMyOrderVO(Long user_id);

@@ -121,6 +121,23 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return commentVOList;
     }
 
+    @Override
+    public List<CommentVO> getGetCommentsListByNumber(int number) {
+        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("createTime")
+                .last("limit " + number);
+        List<Comment> comments = this.list(queryWrapper);
+        List<CommentVO> commentVOList = new ArrayList<>();
+        for (Comment comment : comments) {
+            CommentVO commentVO = new CommentVO();
+            BeanUtils.copyProperties(comment, commentVO);
+            commentVO.setUser(userService.getUserVO(comment.getUser_id()));
+            commentVO.setPost_name(postService.getById(comment.getPost_id()).getTitle());
+            commentVOList.add(commentVO);
+        }
+        return commentVOList;
+    }
+
     /**
      * 多类型搜索
      *

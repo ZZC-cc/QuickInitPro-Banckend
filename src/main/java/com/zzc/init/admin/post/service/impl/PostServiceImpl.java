@@ -152,6 +152,21 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     }
 
     /**
+     * 获取指定数量的VO
+     */
+    @Override
+    public List<PostVO> getPostsVOByNumber(int number) {
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
+        queryWrapper.last("limit " + number).orderByDesc("createTime");
+        List<Post> posts = this.list(queryWrapper);
+        List<PostVO> postVOS = posts.stream().map(post1 -> PostVO.objToVo(post1)).collect(java.util.stream.Collectors.toList());
+        postVOS.forEach(postVO -> {
+            postVO.setUser(userService.getUserByUserId(postVO.getUserId()));
+        });
+        return postVOS;
+    }
+
+    /**
      * 编辑帖子（用户）
      */
     @Override

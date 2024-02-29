@@ -26,6 +26,8 @@ public interface ProductService extends IService<Product> {
 
     List<ProductVO> searchProductBySearchText(String searchText);
 
+    List<ProductVO> getVoByNumber(int number);
+
     List<String> getAllTags();
 
     ProductVO getProductById(Long id);

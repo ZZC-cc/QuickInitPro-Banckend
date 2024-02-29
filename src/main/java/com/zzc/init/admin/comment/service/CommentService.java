@@ -21,6 +21,8 @@ public interface CommentService extends IService<Comment> {
 
     List<CommentVO> getAllCommentsList();
 
+    List<CommentVO> getGetCommentsListByNumber(int number);
+
     List<CommentVO> getCommentBySearchText(String searchText);
 
     boolean deleteCommentsByPostId(Long postId);

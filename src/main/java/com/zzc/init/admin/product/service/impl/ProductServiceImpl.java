@@ -110,6 +110,19 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     /**
+     * 获取指定数量的VO
+     */
+    @Override
+    public List<ProductVO> getVoByNumber(int number) {
+        QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("createTime")
+                .last("limit " + number);
+        List<Product> products = this.list(queryWrapper);
+        List<ProductVO> productVOS = products.stream().map(ProductVO::objToVo).collect(Collectors.toList());
+        return productVOS;
+    }
+
+    /**
      * 获取全部标签名称
      */
     @Override
@@ -118,6 +131,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         ProductTagUtils productTagUtils = new ProductTagUtils();
         return productTagUtils.getAllTags(list);
     }
+
 
     /**
      * 通过id获取VO
