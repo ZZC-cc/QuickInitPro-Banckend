@@ -67,7 +67,7 @@ public class HomeServiceImpl extends ServiceImpl<HomeMapper, Home> implements Ho
         homeVO.setOrderTotalPrice(orderService.list().stream().mapToDouble(item -> item.getTotalPrice()).sum());
         homeVO.setPostList(postService.getPostsVOByNumber(3));
         homeVO.setCommentList(commentService.getGetCommentsListByNumber(6));
-        homeVO.setOrderList(orderService.getOrderVOByNumber(6));
+        homeVO.setOrderList(orderService.getOrderVOByNumber(5));
         homeVO.setProductList(productService.getVoByNumber(3));
         homeVO.setNotice(noticeService.news());
         return homeVO;
