@@ -204,6 +204,20 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements Ta
         }
         return taskDataVO;
     }
+
+    /**
+     * 根据id获取任务VO
+     */
+    @Override
+    public TaskVO getTaskById(Long id) {
+        Task task = this.getById(id);
+        TaskVO taskVO = new TaskVO();
+        BeanUtils.copyProperties(task, taskVO);
+        taskVO.setUser(userService.getUserByUserId(task.getUserId()));
+        taskVO.setPrincipal(userService.getUserByUserId(task.getPrincipalId()));
+        taskVO.setPost(postService.getPostById(task.getLinkId()));
+        return taskVO;
+    }
 }
 
 

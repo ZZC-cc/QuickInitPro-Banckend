@@ -34,4 +34,6 @@ public interface TaskService extends IService<Task> {
     List<TaskVO> getTaskByUser(long userId);
 
     TaskDataVO getTasksData(long userId);
+
+    TaskVO getTaskById(Long id);
 }

@@ -1,5 +1,6 @@
 package com.zzc.init.admin.task.controller;
 
+import com.zzc.init.admin.score.service.ScoreService;
 import com.zzc.init.admin.task.model.dto.*;
 import com.zzc.init.admin.task.model.vo.TaskDataVO;
 import com.zzc.init.admin.task.model.vo.TaskVO;
@@ -30,6 +31,9 @@ public class TaskController {
     @Resource
     private TaskService taskService;
 
+    @Resource
+    private ScoreService scoreService;
+
     /**
      * 创建任务接口
      */
@@ -50,6 +54,9 @@ public class TaskController {
     public BaseResponse<String> updateTask(@RequestBody TaskUpdateRequest taskUpdateRequest) {
         if (!taskService.updateTask(taskUpdateRequest)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "更新任务失败");
+        }
+        if (taskUpdateRequest.getProgress() >= 100.00) {
+            scoreService.createScore(taskUpdateRequest.getId());
         }
         return ResultUtils.success("更新任务成功");
     }
