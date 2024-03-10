@@ -10,9 +10,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.zzc</groupId>
-    <artifactId>QuickInit</artifactId>
+    <artifactId>QuickInitPro-Backend</artifactId>
     <version>0.0.1</version>
-    <name>QuickInit Pro - Backend</name>
+    <name>QuickInitPro-Backend</name>
     <properties>
         <java.version>1.8</java.version>
     </properties>
